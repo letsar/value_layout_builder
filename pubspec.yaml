@@ -1,0 +1,16 @@
+name: value_layout_builder
+description: A LayoutBuilder with an extra value. It's useful when you want to build a widget with a value computed during layout.
+version: 0.1.0
+homepage: https://github.com/letsar/value_layout_builder
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0 <2.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
