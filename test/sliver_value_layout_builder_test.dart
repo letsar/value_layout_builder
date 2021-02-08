@@ -6,9 +6,9 @@ import 'package:value_layout_builder/value_layout_builder.dart';
 
 class _Tester<T> extends SingleChildRenderObjectWidget {
   const _Tester({
-    Key key,
-    @required this.value,
-    @required Widget child,
+    Key? key,
+    required this.value,
+    required Widget child,
   }) : super(key: key, child: child);
 
   final T value;
@@ -28,7 +28,7 @@ class _Tester<T> extends SingleChildRenderObjectWidget {
 class _SliverRenderTester<T> extends RenderSliver
     with RenderObjectWithChildMixin<RenderSliver> {
   _SliverRenderTester({
-    @required T value,
+    required T value,
   }) : _value = value;
 
   T get value => _value;
@@ -46,7 +46,7 @@ class _SliverRenderTester<T> extends RenderSliver
       constraints: this.constraints,
       value: value,
     );
-    child.layout(constraints);
+    child?.layout(constraints);
     geometry = SliverGeometry.zero;
   }
 }
