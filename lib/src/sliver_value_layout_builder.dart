@@ -2,7 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 /// The signature of the [SliverValueLayoutBuilder] builder function.
-typedef SliverValueLayoutWidgetBuilder<T> = Widget Function(
+typedef Widget SliverValueLayoutWidgetBuilder<T>(
   BuildContext context,
   SliverValueConstraints<T> constraints,
 );
@@ -81,8 +81,6 @@ class SliverValueConstraints<T> extends SliverConstraints {
 class SliverValueLayoutBuilder<T>
     extends ConstrainedLayoutBuilder<SliverValueConstraints<T>> {
   /// Creates a sliver widget that defers its building until layout.
-  ///
-  /// The [builder] argument must not be null.
   const SliverValueLayoutBuilder({
     Key? key,
     required SliverValueLayoutWidgetBuilder<T> builder,

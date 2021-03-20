@@ -101,8 +101,12 @@ class _RenderValueLayoutBuilder<T> extends RenderBox
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
     rebuildIfNecessary();
-    child?.layout(constraints, parentUsesSize: true);
-    size = constraints.constrain(child?.size ?? constraints.biggest);
+    if (child != null) {
+      child!.layout(constraints, parentUsesSize: true);
+      size = constraints.constrain(child!.size);
+    } else {
+      size = constraints.biggest;
+    }
   }
 
   @override
