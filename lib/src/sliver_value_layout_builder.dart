@@ -11,7 +11,7 @@ class SliverValueConstraints<T> extends SliverConstraints {
   SliverValueConstraints({
     required this.value,
     required SliverConstraints constraints,
-  })  : super(
+  }) : super(
           axisDirection: constraints.axisDirection,
           growthDirection: constraints.growthDirection,
           userScrollDirection: constraints.userScrollDirection,
@@ -124,7 +124,7 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
   @override
   void paint(PaintingContext context, Offset offset) {
     // This renderObject does not introduce additional offset to child's position.
-      if (child?.geometry?.visible == true) context.paintChild(child!, offset);
+    if (child?.geometry?.visible == true) context.paintChild(child!, offset);
   }
 
   @override
