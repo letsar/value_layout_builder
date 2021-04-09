@@ -54,8 +54,6 @@ class BoxValueConstraints<T> extends BoxConstraints {
 class ValueLayoutBuilder<T>
     extends ConstrainedLayoutBuilder<BoxValueConstraints<T>> {
   /// Creates a widget that defers its building until layout.
-  ///
-  /// The [builder] argument must not be null.
   const ValueLayoutBuilder({
     Key? key,
     required ValueLayoutWidgetBuilder<T> builder,

@@ -2,7 +2,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 /// The signature of the [SliverValueLayoutBuilder] builder function.
-typedef Widget SliverValueLayoutWidgetBuilder<T>(
+typedef SliverValueLayoutWidgetBuilder<T> = Widget Function(
   BuildContext context,
   SliverValueConstraints<T> constraints,
 );
