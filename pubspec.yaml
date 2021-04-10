@@ -1,6 +1,6 @@
 name: value_layout_builder
 description: A LayoutBuilder with an extra value. It's useful when you want to build a widget with a value computed during layout.
-version: 0.3.0
+version: 0.3.1
 homepage: https://github.com/letsar/value_layout_builder
 
 environment:
