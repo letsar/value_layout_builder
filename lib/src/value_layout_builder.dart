@@ -11,7 +11,7 @@ class BoxValueConstraints<T> extends BoxConstraints {
   BoxValueConstraints({
     required this.value,
     required BoxConstraints constraints,
-  })  : super(
+  }) : super(
           minWidth: constraints.minWidth,
           maxWidth: constraints.maxWidth,
           minHeight: constraints.minHeight,
@@ -57,7 +57,7 @@ class ValueLayoutBuilder<T>
   const ValueLayoutBuilder({
     Key? key,
     required ValueLayoutWidgetBuilder<T> builder,
-  })  : super(key: key, builder: builder);
+  }) : super(key: key, builder: builder);
 
   @override
   ValueLayoutWidgetBuilder<T> get builder => super.builder;
