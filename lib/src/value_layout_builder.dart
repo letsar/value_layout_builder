@@ -9,10 +9,9 @@ typedef ValueLayoutWidgetBuilder<T> = Widget Function(
 
 class BoxValueConstraints<T> extends BoxConstraints {
   BoxValueConstraints({
-    @required this.value,
-    @required BoxConstraints constraints,
-  })  : assert(constraints != null),
-        super(
+    required this.value,
+    required BoxConstraints constraints,
+  })  : super(
           minWidth: constraints.minWidth,
           maxWidth: constraints.maxWidth,
           minHeight: constraints.minHeight,
@@ -55,13 +54,10 @@ class BoxValueConstraints<T> extends BoxConstraints {
 class ValueLayoutBuilder<T>
     extends ConstrainedLayoutBuilder<BoxValueConstraints<T>> {
   /// Creates a widget that defers its building until layout.
-  ///
-  /// The [builder] argument must not be null.
   const ValueLayoutBuilder({
-    Key key,
-    @required ValueLayoutWidgetBuilder<T> builder,
-  })  : assert(builder != null),
-        super(key: key, builder: builder);
+    Key? key,
+    required ValueLayoutWidgetBuilder<T> builder,
+  })  : super(key: key, builder: builder);
 
   @override
   ValueLayoutWidgetBuilder<T> get builder => super.builder;
@@ -104,21 +100,21 @@ class _RenderValueLayoutBuilder<T> extends RenderBox
     final BoxConstraints constraints = this.constraints;
     rebuildIfNecessary();
     if (child != null) {
-      child.layout(constraints, parentUsesSize: true);
-      size = constraints.constrain(child.size);
+      child!.layout(constraints, parentUsesSize: true);
+      size = constraints.constrain(child!.size);
     } else {
       size = constraints.biggest;
     }
   }
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, {Offset position}) {
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) {
     return child?.hitTest(result, position: position) ?? false;
   }
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    if (child != null) context.paintChild(child, offset);
+    if (child != null) context.paintChild(child!, offset);
   }
 
   bool _debugThrowIfNotCheckingIntrinsics() {

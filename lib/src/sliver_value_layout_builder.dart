@@ -9,10 +9,9 @@ typedef SliverValueLayoutWidgetBuilder<T> = Widget Function(
 
 class SliverValueConstraints<T> extends SliverConstraints {
   SliverValueConstraints({
-    @required this.value,
-    @required SliverConstraints constraints,
-  })  : assert(constraints != null),
-        super(
+    required this.value,
+    required SliverConstraints constraints,
+  })  : super(
           axisDirection: constraints.axisDirection,
           growthDirection: constraints.growthDirection,
           userScrollDirection: constraints.userScrollDirection,
@@ -82,11 +81,9 @@ class SliverValueConstraints<T> extends SliverConstraints {
 class SliverValueLayoutBuilder<T>
     extends ConstrainedLayoutBuilder<SliverValueConstraints<T>> {
   /// Creates a sliver widget that defers its building until layout.
-  ///
-  /// The [builder] argument must not be null.
   const SliverValueLayoutBuilder({
-    Key key,
-    SliverValueLayoutWidgetBuilder<T> builder,
+    Key? key,
+    required SliverValueLayoutWidgetBuilder<T> builder,
   }) : super(key: key, builder: builder);
 
   /// Called at layout time to construct the widget tree.
@@ -107,7 +104,6 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
             RenderSliver> {
   @override
   double childMainAxisPosition(RenderObject child) {
-    assert(child != null);
     assert(child == this.child);
     return 0;
   }
@@ -121,7 +117,6 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
 
   @override
   void applyPaintTransform(RenderObject child, Matrix4 transform) {
-    assert(child != null);
     assert(child == this.child);
     // child's offset is always (0, 0), transform.translate(0, 0) does not mutate the transform.
   }
@@ -129,15 +124,15 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
   @override
   void paint(PaintingContext context, Offset offset) {
     // This renderObject does not introduce additional offset to child's position.
-    if (child?.geometry?.visible == true) context.paintChild(child, offset);
+      if (child?.geometry?.visible == true) context.paintChild(child!, offset);
   }
 
   @override
   bool hitTestChildren(SliverHitTestResult result,
-      {double mainAxisPosition, double crossAxisPosition}) {
+      {required double mainAxisPosition, required double crossAxisPosition}) {
     return child != null &&
-        child.geometry.hitTestExtent > 0 &&
-        child.hitTest(result,
+        child!.geometry!.hitTestExtent > 0 &&
+        child!.hitTest(result,
             mainAxisPosition: mainAxisPosition,
             crossAxisPosition: crossAxisPosition);
   }

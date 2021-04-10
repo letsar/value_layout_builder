@@ -1,3 +1,9 @@
+## 0.3.0
+### Changed
+* Add support for null-safety.
+* Increase the minimum version of Flutter.
+* Increase the minimum version of dart sdk.
+
 ## 0.2.0
 ### Changed
 * The minimum version of Flutter.
