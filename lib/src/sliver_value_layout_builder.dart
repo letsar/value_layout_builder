@@ -32,9 +32,8 @@ class SliverValueConstraints<T> extends SliverConstraints {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! SliverValueConstraints<T>) return false;
-    assert(other is SliverValueConstraints<T> && other.debugAssertIsValid());
-    return other is SliverValueConstraints<T> &&
-        other.value == value &&
+    assert(other.debugAssertIsValid());
+    return other.value == value &&
         other.axisDirection == axisDirection &&
         other.growthDirection == growthDirection &&
         other.scrollOffset == scrollOffset &&

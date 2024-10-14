@@ -1,3 +1,8 @@
+## 0.4.0
+### Changed
+* Flutter & Dart SDK constraints
+* Removed usage of hashValues (https://github.com/letsar/value_layout_builder/pull/5)
+
 ## 0.3.1
 ### Changed
 * Small formatting issues.

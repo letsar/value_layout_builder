@@ -21,7 +21,7 @@ class BoxValueConstraints<T> extends BoxConstraints {
   final T value;
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     assert(debugAssertIsValid());
     if (identical(this, other)) return true;
     if (other is! BoxValueConstraints<T>) return false;
