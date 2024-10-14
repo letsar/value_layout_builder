@@ -37,7 +37,7 @@ class BoxValueConstraints<T> extends BoxConstraints {
   @override
   int get hashCode {
     assert(debugAssertIsValid());
-    return hashValues(minWidth, maxWidth, minHeight, maxHeight, value);
+    return Object.hash(minWidth, maxWidth, minHeight, maxHeight, value);
   }
 }
 
