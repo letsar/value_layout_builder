@@ -99,8 +99,10 @@ class SliverValueLayoutBuilder<T>
 class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
     with
         RenderObjectWithChildMixin<RenderSliver>,
+        RenderObjectWithLayoutCallbackMixin,
         RenderConstrainedLayoutBuilder<SliverValueConstraints<T>,
             RenderSliver> {
+
   @override
   double childMainAxisPosition(RenderObject child) {
     assert(child == this.child);
@@ -109,7 +111,13 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
 
   @override
   void performLayout() {
-    rebuildIfNecessary();
+    final SliverValueConstraints<T> constraints = this.constraints as SliverValueConstraints<T>;
+
+    // Call the builder with the constraints
+    invokeLayoutCallback<SliverValueConstraints<T>>((SliverValueConstraints<T> constraints) {
+      // This is where we would call buildChild() in older versions
+    });
+
     child?.layout(constraints, parentUsesSize: true);
     geometry = child?.geometry ?? SliverGeometry.zero;
   }

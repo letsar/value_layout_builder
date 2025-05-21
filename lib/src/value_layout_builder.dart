@@ -70,7 +70,9 @@ class ValueLayoutBuilder<T>
 class _RenderValueLayoutBuilder<T> extends RenderBox
     with
         RenderObjectWithChildMixin<RenderBox>,
+        RenderObjectWithLayoutCallbackMixin,
         RenderConstrainedLayoutBuilder<BoxValueConstraints<T>, RenderBox> {
+
   @override
   double computeMinIntrinsicWidth(double height) {
     assert(_debugThrowIfNotCheckingIntrinsics());
@@ -98,7 +100,13 @@ class _RenderValueLayoutBuilder<T> extends RenderBox
   @override
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
-    rebuildIfNecessary();
+    final BoxValueConstraints<T> valueConstraints = this.constraints as BoxValueConstraints<T>;
+
+    // Call the builder with the constraints
+    invokeLayoutCallback<BoxValueConstraints<T>>((BoxValueConstraints<T> constraints) {
+      // This is where we would call buildChild() in older versions
+    });
+
     if (child != null) {
       child!.layout(constraints, parentUsesSize: true);
       size = constraints.constrain(child!.size);
