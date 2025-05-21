@@ -99,6 +99,7 @@ class SliverValueLayoutBuilder<T>
 class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
     with
         RenderObjectWithChildMixin<RenderSliver>,
+        RenderObjectWithLayoutCallbackMixin,
         RenderConstrainedLayoutBuilder<SliverValueConstraints<T>,
             RenderSliver> {
   @override
@@ -109,7 +110,7 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
 
   @override
   void performLayout() {
-    rebuildIfNecessary();
+    runLayoutCallback();
     child?.layout(constraints, parentUsesSize: true);
     geometry = child?.geometry ?? SliverGeometry.zero;
   }
@@ -127,12 +128,17 @@ class _RenderSliverValueLayoutBuilder<T> extends RenderSliver
   }
 
   @override
-  bool hitTestChildren(SliverHitTestResult result,
-      {required double mainAxisPosition, required double crossAxisPosition}) {
+  bool hitTestChildren(
+    SliverHitTestResult result, {
+    required double mainAxisPosition,
+    required double crossAxisPosition,
+  }) {
     return child != null &&
         child!.geometry!.hitTestExtent > 0 &&
-        child!.hitTest(result,
-            mainAxisPosition: mainAxisPosition,
-            crossAxisPosition: crossAxisPosition);
+        child!.hitTest(
+          result,
+          mainAxisPosition: mainAxisPosition,
+          crossAxisPosition: crossAxisPosition,
+        );
   }
 }

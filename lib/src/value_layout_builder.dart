@@ -70,7 +70,8 @@ class ValueLayoutBuilder<T>
 class _RenderValueLayoutBuilder<T> extends RenderBox
     with
         RenderObjectWithChildMixin<RenderBox>,
-        RenderConstrainedLayoutBuilder<BoxValueConstraints<T>, RenderBox> {
+        RenderObjectWithLayoutCallbackMixin,
+        RenderAbstractLayoutBuilderMixin<BoxValueConstraints<T>, RenderBox> {
   @override
   double computeMinIntrinsicWidth(double height) {
     assert(_debugThrowIfNotCheckingIntrinsics());
@@ -96,15 +97,48 @@ class _RenderValueLayoutBuilder<T> extends RenderBox
   }
 
   @override
+  Size computeDryLayout(BoxConstraints constraints) {
+    assert(
+      debugCannotComputeDryLayout(
+        reason:
+            'Calculating the dry layout would require running the layout callback '
+            'speculatively, which might mutate the live render object tree.',
+      ),
+    );
+    return Size.zero;
+  }
+
+  @override
+  double? computeDryBaseline(
+    BoxConstraints constraints,
+    TextBaseline baseline,
+  ) {
+    assert(
+      debugCannotComputeDryLayout(
+        reason:
+            'Calculating the dry baseline would require running the layout callback '
+            'speculatively, which might mutate the live render object tree.',
+      ),
+    );
+    return null;
+  }
+
+  @override
   void performLayout() {
     final BoxConstraints constraints = this.constraints;
-    rebuildIfNecessary();
+    runLayoutCallback();
     if (child != null) {
       child!.layout(constraints, parentUsesSize: true);
       size = constraints.constrain(child!.size);
     } else {
       size = constraints.biggest;
     }
+  }
+
+  @override
+  double? computeDistanceToActualBaseline(TextBaseline baseline) {
+    return child?.getDistanceToActualBaseline(baseline) ??
+        super.computeDistanceToActualBaseline(baseline);
   }
 
   @override

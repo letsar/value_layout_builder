@@ -1,3 +1,10 @@
+## 0.5.0
+### Changed
+* Flutter constraints
+
+### Fixed
+* Fixes [Flutter 3.32 breaking changes](https://github.com/letsar/value_layout_builder/issues/6)
+
 ## 0.4.0
 ### Changed
 * Flutter & Dart SDK constraints
